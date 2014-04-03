@@ -3,6 +3,22 @@ from urllib import quote as uquote
 from urllib import unquote as uunquote
 from urllib import quote_plus as uquote_plus
 from urllib import unquote_plus as uunquote_plus
+import vim
+
+
+def selected_text():
+    try:
+        return vim.eval("SelectedText()")
+    except:
+        return None
+
+
+def actual_text():
+    """Return text actual for 'something'"""
+    res = selected_text()
+    if res is None:
+        res = ''.join(vim.current.buffer[:])
+    return res
 
 
 def format_json(js_text):

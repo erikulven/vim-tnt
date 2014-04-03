@@ -14,6 +14,20 @@ python sys.path.append(vim.eval('expand("<sfile>:h")'))
 " --------------------------------
 "  Function(s)
 " --------------------------------
+
+" copied from xolox's answer at stackoverflow. Thanks xolox!
+"http://stackoverflow.com/questions/1533565/how-to-get-visually-selected-text-in-vimscript
+function! SelectedText()
+  " Why is this not a built-in Vim script function?!
+  let [lnum1, col1] = getpos("'<")[1:2]
+  let [lnum2, col2] = getpos("'>")[1:2]
+  let lines = getline(lnum1, lnum2)
+  let lines[-1] = lines[-1][: col2 - (&selection == 'inclusive' ? 1 : 2)]
+  let lines[0] = lines[0][col1 - 1:]
+  return join(lines, "\n")
+endfunction
+
+
 function! JsonFormat()
 python << endOfPython
 
@@ -35,10 +49,15 @@ endfunction
 function! UrlPathEncode()
 python << endOfPython
 
-from vim_tnt import quote_plus
+from vim_tnt import quote_plus, actual_text
 
 try:
-    print "url-path-encoded: %s" % quote_plus(''.join(vim.current.buffer[:]))
+    
+    selected = actual_text()
+    if selected is not None:
+        print "url-path-encoded: %s" % quote_plus(selected)
+    else:
+        print "No selection!"
 except Exception as e:
     print e
 
@@ -49,10 +68,10 @@ endfunction
 function! UrlPathDecode()
 python << endOfPython
 
-from vim_tnt import unquote_plus
+from vim_tnt import unquote_plus, actual_text
 
 try:
-    print "url-path-decoded: %s" % unquote_plus(''.join(vim.current.buffer[:]))
+    print "url-path-decoded: %s" % unquote_plus(actual_text())
 except Exception as e:
     print e
 
@@ -63,10 +82,10 @@ endfunction
 function! UrlEncode()
 python << endOfPython
 
-from vim_tnt import quote
+from vim_tnt import quote, actual_text
 
 try:
-    print "url-encoded: %s" % quote(''.join(vim.current.buffer[:]))
+    print "url-encoded: %s" % quote(actual_text())
 except Exception as e:
     print e
 
@@ -77,10 +96,10 @@ endfunction
 function! UrlDecode()
 python << endOfPython
 
-from vim_tnt import unquote
+from vim_tnt import unquote, actual_text
 
 try:
-    print "url-decoded: %s" % unquote(''.join(vim.current.buffer[:]))
+    print "url-decoded: %s" % unquote(actual_text())
 except Exception as e:
     print e
 
@@ -97,3 +116,4 @@ command! UrlPathEncode call UrlPathEncode()
 command! UrlPathDecode call UrlPathDecode()
 command! UrlEncode call UrlEncode()
 command! UrlDecode call UrlDecode()
+command! SelectedText call SelectedText()
