@@ -31,7 +31,69 @@ except Exception as e:
 endOfPython
 endfunction
 
+
+function! UrlPathEncode()
+python << endOfPython
+
+from vim_tnt import quote_plus
+
+try:
+    print "url-path-encoded: %s" % quote_plus(''.join(vim.current.buffer[:]))
+except Exception as e:
+    print e
+
+endOfPython
+endfunction
+
+
+function! UrlPathDecode()
+python << endOfPython
+
+from vim_tnt import unquote_plus
+
+try:
+    print "url-path-decoded: %s" % unquote_plus(''.join(vim.current.buffer[:]))
+except Exception as e:
+    print e
+
+endOfPython
+endfunction
+
+
+function! UrlEncode()
+python << endOfPython
+
+from vim_tnt import quote
+
+try:
+    print "url-encoded: %s" % quote(''.join(vim.current.buffer[:]))
+except Exception as e:
+    print e
+
+endOfPython
+endfunction
+
+
+function! UrlDecode()
+python << endOfPython
+
+from vim_tnt import unquote
+
+try:
+    print "url-decoded: %s" % unquote(''.join(vim.current.buffer[:]))
+except Exception as e:
+    print e
+
+endOfPython
+endfunction
+
+
+
 " --------------------------------
 "  Expose our commands to the user
 " --------------------------------
 command! JsonFormat call JsonFormat()
+command! UrlPathEncode call UrlPathEncode()
+command! UrlPathDecode call UrlPathDecode()
+command! UrlEncode call UrlEncode()
+command! UrlDecode call UrlDecode()
