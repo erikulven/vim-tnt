@@ -79,10 +79,10 @@ def expand_identifier_naive(identifier):
 def expand_identifier(identifier):
     """Expands identifier to directories."""
     res = []
-    for c in identifier:
+    for c in identifier.decode('utf8'):
         res.append(enc_spec_char(c))
         res.append('/')
-    ids = [enc_spec_char(c) for c in identifier]
+    ids = [enc_spec_char(c) for c in identifier.decode('utf8')]
     res.append(''.join(ids))
     return ''.join(res)
 
