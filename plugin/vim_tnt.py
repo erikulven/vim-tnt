@@ -64,33 +64,3 @@ def unquote_plus(s):
         else:
             return uunquote_plus(s)
     return None
-
-
-def expand_identifier_naive(identifier):
-    """Expands identifier to directories."""
-    res = []
-    for c in identifier:
-        res.append(c)
-        res.append('/')
-    res.append(identifier)
-    return ''.join(res)
-
-
-def expand_identifier(identifier):
-    """Expands identifier to directories."""
-    res = []
-    for c in identifier.decode('utf8'):
-        res.append(enc_spec_char(c))
-        res.append('/')
-    ids = [enc_spec_char(c) for c in identifier.decode('utf8')]
-    res.append(''.join(ids))
-    return ''.join(res)
-
-
-def enc_spec_char(c):
-    if c:
-        if c.isdigit() or c.isalpha():
-            return c
-        else:
-            return "__%s__" % str(ord(c))
-    return None

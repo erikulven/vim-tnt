@@ -108,34 +108,6 @@ except Exception as e:
 endOfPython
 endfunction
 
-function! IdentifierExpandNaive()
-python << endOfPython
-
-from vim_tnt import expand_identifier_naive, actual_text
-
-try:
-    print "identifier expanded naively: %s" % expand_identifier_naive(actual_text())
-except Exception as e:
-    print e
-
-endOfPython
-endfunction
-
-
-function! IdentifierExpand()
-python << endOfPython
-
-from vim_tnt import expand_identifier, actual_text
-
-try:
-    print "identifier expanded: %s" % expand_identifier(actual_text())
-except Exception as e:
-    print e
-
-endOfPython
-endfunction
-
-
 
 " --------------------------------
 "  Expose our commands to the user
@@ -146,5 +118,3 @@ command! UrlPathDecode call UrlPathDecode()
 command! UrlEncode call UrlEncode()
 command! UrlDecode call UrlDecode()
 command! SelectedText call SelectedText()
-command! IdentifierExpandNaive call IdentifierExpandNaive()
-command! IdentifierExpand call IdentifierExpand()
