@@ -38,6 +38,7 @@ try:
     del vim.current.buffer[:]
     for l in js:
         vim.current.buffer.append(l)
+    vim.command("set ft=javascript")
 except Exception as e:
     print e
 
@@ -52,7 +53,6 @@ python << endOfPython
 from vim_tnt import quote_plus, actual_text
 
 try:
-    
     selected = actual_text()
     if selected is not None:
         print "url-path-encoded: %s" % quote_plus(selected)
