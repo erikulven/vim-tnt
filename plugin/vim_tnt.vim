@@ -49,13 +49,13 @@ endOfPython
 endfunction
 
 
-function! UrlPathEncode()
+function! UrlPathEncode(url)
 python << endOfPython
 
 from vim_tnt import quote_plus, actual_text
 
 try:
-    selected = actual_text()
+    selected = vim.eval("a:url") or actual_text()
     if selected is not None:
         print "url-path-encoded: %s" % quote_plus(selected)
     else:
@@ -67,13 +67,14 @@ endOfPython
 endfunction
 
 
-function! UrlPathDecode()
+function! UrlPathDecode(url)
 python << endOfPython
 
 from vim_tnt import unquote_plus, actual_text
 
 try:
-    print "url-path-decoded: %s" % unquote_plus(actual_text())
+    selected = vim.eval("a:url") or actual_text()
+    print "url-path-decoded: %s" % unquote_plus(selected)
 except Exception as e:
     print e
 
@@ -81,13 +82,14 @@ endOfPython
 endfunction
 
 
-function! UrlEncode()
+function! UrlEncode(url)
 python << endOfPython
 
 from vim_tnt import quote, actual_text
 
 try:
-    print "url-encoded: %s" % quote(actual_text())
+    selected = vim.eval("a:url") or actual_text()
+    print "url-encoded: %s" % quote(selected)
 except Exception as e:
     print e
 
@@ -95,13 +97,14 @@ endOfPython
 endfunction
 
 
-function! UrlDecode()
+function! UrlDecode(url)
 python << endOfPython
 
 from vim_tnt import unquote, actual_text
 
 try:
-    print "url-decoded: %s" % unquote(actual_text())
+    selected = vim.eval("a:url") or actual_text()
+    print "url-decoded: %s" % unquote(selected)
 except Exception as e:
     print e
 
@@ -113,8 +116,8 @@ endfunction
 "  Expose our commands to the user
 " --------------------------------
 command! JsonFormat call JsonFormat()
-command! UrlPathEncode call UrlPathEncode()
-command! UrlPathDecode call UrlPathDecode()
-command! UrlEncode call UrlEncode()
-command! UrlDecode call UrlDecode()
-command! SelectedText call SelectedText()
+" command! UrlPathEncode call UrlPathEncode()
+" command! UrlPathDecode call UrlPathDecode()
+" command! UrlEncode call UrlEncode()
+" command! UrlDecode call UrlDecode()
+" command! SelectedText call SelectedText()
