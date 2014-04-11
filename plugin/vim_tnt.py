@@ -19,8 +19,6 @@ def fold_python_docstrings():
             start_fold = c + 1
         elif start_fold >= 0 and (l.endswith('"""') or l.endswith("'''")):
             end_fold = c + 1
-            print "vim cmd:"
-            print "%s,%sfold" % (start_fold, end_fold)
             vim.command("%s,%sfold" % (start_fold, end_fold))
             start_fold = end_fold = -1
 
