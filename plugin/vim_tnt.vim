@@ -112,6 +112,20 @@ endOfPython
 endfunction
 
 
+function! FoldPyDocstrings()
+python << endOfPython
+
+from vim_tnt import fold_python_docstrings
+
+try:
+    fold_python_docstrings()
+except Exception as e:
+    print e
+
+endOfPython
+endfunction
+
+
 " --------------------------------
 "  Expose our commands to the user
 " --------------------------------
@@ -121,3 +135,4 @@ command! JsonFormat call JsonFormat()
 " command! UrlEncode call UrlEncode()
 " command! UrlDecode call UrlDecode()
 " command! SelectedText call SelectedText()
+command! FoldPyDoc call FoldPyDocstrings()

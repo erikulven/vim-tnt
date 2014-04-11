@@ -6,6 +6,25 @@ from urllib import unquote_plus as uunquote_plus
 import vim
 
 
+def fold_python_docstrings():
+    b = vim.current.buffer
+    end = len(b)
+    vim.command("set foldmethod=manual")
+    vim.command("set fml=0")
+    start_fold = -1
+    end_fold = -1
+    for c in range(end):
+        l = b[c].strip()
+        if start_fold < 0 and (l.startswith('"""') or l.startswith("'''")):
+            start_fold = c + 1
+        elif start_fold >= 0 and (l.endswith('"""') or l.endswith("'''")):
+            end_fold = c + 1
+            print "vim cmd:"
+            print "%s,%sfold" % (start_fold, end_fold)
+            vim.command("%s,%sfold" % (start_fold, end_fold))
+            start_fold = end_fold = -1
+
+
 def selected_text():
     try:
         return vim.eval("SelectedText()")
