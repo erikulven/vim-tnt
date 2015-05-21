@@ -3,6 +3,7 @@ from urllib import quote as uquote
 from urllib import unquote as uunquote
 from urllib import quote_plus as uquote_plus
 from urllib import unquote_plus as uunquote_plus
+import sqlparse
 import vim
 
 
@@ -41,6 +42,10 @@ def actual_text():
 def format_json(js_text):
     res = json.loads(js_text)
     return json.dumps(res, sort_keys=True, indent=4).split('\n')
+
+
+def format_sql(sql_text):
+    return sqlparse.format(sql_text, reindent=True, keyword_case='upper')
 
 
 def quote(s):

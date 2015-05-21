@@ -49,6 +49,28 @@ endOfPython
 endfunction
 
 
+function! SqlFormat()
+python << endOfPython
+
+from vim_tnt import format_sql
+
+try:
+    _sql = format_sql(''.join(vim.current.buffer[:]))
+    del vim.current.buffer[:]
+    counter = 0
+    for l in _sql:
+        vim.current.buffer.append(l, counter)
+        counter += 1
+    vim.command("set ft=sql")
+except Exception as e:
+    print e
+
+
+endOfPython
+endfunction
+
+
+
 function! UrlPathEncode(url)
 python << endOfPython
 
