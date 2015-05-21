@@ -45,7 +45,7 @@ def format_json(js_text):
 
 
 def format_sql(sql_text):
-    return sqlparse.format(sql_text, reindent=True, keyword_case='upper').split('\n')
+    return sqlparse.format(sql_text, reindent=True).split('\n')
 
 
 def quote(s):
