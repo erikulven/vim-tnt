@@ -27,6 +27,27 @@ function! SelectedText()
   return join(lines, "\n")
 endfunction
 
+function! FetchJSON()
+python << endOfPython
+
+from vim_tnt import fetch_json
+
+try:
+    js = fetch_json(''.join(vim.current.buffer[:]))
+    del vim.current.buffer[:]
+    counter = 0
+    for l in js:
+        vim.current.buffer.append(l, counter)
+        counter += 1
+    vim.command("set ft=javascript")
+except Exception as e:
+    print e
+
+
+endOfPython
+endfunction
+
+
 
 function! JsonFormat()
 python << endOfPython

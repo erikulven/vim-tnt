@@ -3,6 +3,7 @@ from urllib import quote as uquote
 from urllib import unquote as uunquote
 from urllib import quote_plus as uquote_plus
 from urllib import unquote_plus as uunquote_plus
+import requests
 import sqlparse
 import vim
 
@@ -29,6 +30,11 @@ def selected_text():
         return vim.eval("SelectedText()")
     except:
         return None
+
+
+def fetch_json(url):
+    res = requests.get(url).text
+    return format_json(res)
 
 
 def actual_text():
