@@ -1,5 +1,5 @@
-if !has('python')
-    echo "Error: Required vim compiled with +python"
+if !has('python3')
+    echo "Error: Required vim compiled with +python3"
     finish
 endif
 
@@ -173,9 +173,9 @@ endfunction
 "  Expose our commands to the user
 " --------------------------------
 command! JsonFormat call JsonFormat()
-" command! UrlPathEncode call UrlPathEncode()
-" command! UrlPathDecode call UrlPathDecode()
-" command! UrlEncode call UrlEncode()
-" command! UrlDecode call UrlDecode()
-" command! SelectedText call SelectedText()
+command! UrlPathEncode call UrlPathEncode()
+command! UrlPathDecode call UrlPathDecode()
+command! UrlEncode call UrlEncode()
+command! UrlDecode call UrlDecode()
+command! SelectedText call SelectedText()
 command! FoldPyDoc call FoldPyDocstrings()
