@@ -6,9 +6,9 @@ endif
 " --------------------------------
 " Add our plugin to the path
 " --------------------------------
-python import sys
-python import vim
-python sys.path.append(vim.eval('expand("<sfile>:h")'))
+python3 import sys
+python3 import vim
+python3 sys.path.append(vim.eval('expand("<sfile>:h")'))
 
 
 " --------------------------------
@@ -28,7 +28,7 @@ function! SelectedText()
 endfunction
 
 function! FetchJSON()
-python << endOfPython
+python3 << endOfPython
 
 from vim_tnt import fetch_json
 
@@ -50,7 +50,7 @@ endfunction
 
 
 function! JsonFormat()
-python << endOfPython
+python3 << endOfPython
 
 from vim_tnt import format_json
 
@@ -71,7 +71,7 @@ endfunction
 
 
 function! SqlFormat()
-python << endOfPython
+python3 << endOfPython
 
 from vim_tnt import format_sql
 
@@ -93,7 +93,7 @@ endfunction
 
 
 function! UrlPathEncode(url)
-python << endOfPython
+python3 << endOfPython
 
 from vim_tnt import quote_plus, actual_text
 
@@ -111,7 +111,7 @@ endfunction
 
 
 function! UrlPathDecode(url)
-python << endOfPython
+python3 << endOfPython
 
 from vim_tnt import unquote_plus, actual_text
 
@@ -126,7 +126,7 @@ endfunction
 
 
 function! UrlEncode(url)
-python << endOfPython
+python3 << endOfPython
 
 from vim_tnt import quote, actual_text
 
@@ -141,7 +141,7 @@ endfunction
 
 
 function! UrlDecode(url)
-python << endOfPython
+python3 << endOfPython
 
 from vim_tnt import unquote, actual_text
 
@@ -156,7 +156,7 @@ endfunction
 
 
 function! FoldPyDocstrings()
-python << endOfPython
+python3 << endOfPython
 
 from vim_tnt import fold_python_docstrings
 
